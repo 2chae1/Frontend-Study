@@ -1,0 +1,28 @@
+.tab_menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.tab_btn {
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: large;
+}
+
+.tab_cont {
+    width: 1000px;
+    height: 300px;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.clicked {
+    background-color: grey;
+}
