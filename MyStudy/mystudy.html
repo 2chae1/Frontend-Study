@@ -4,21 +4,46 @@
     <meta charset="UTF-8">
     <title>MyStudy</title>
     <link rel="stylesheet" href="mystudy.css" type="text/css"/>
+    <link rel="stylesheet" href="tab1.css" type="text/css"/>
 </head>
 <body>
     <header>
         <h1> Study With Me : 0 </h1>
         <nav id = tab_menu>
-            <button class="tab_btn clicked" data-id="tab1">TAB1</button>
+            <button class="tab_btn clicked" data-id="tab1">Element BackGround</button>
             <button class="tab_btn" data-id="tab2">TAB2</button>
             <button class="tab_btn" data-id="tab3">TAB3</button>
         </nav>
     </header>
 
     <main>
-        <div id="tab1" class="tab_cont">tab1</div>
-        <div id="tab2" class="tab_cont hidden">tab2</div>
-        <div id="tab3" class="tab_cont hidden">tab3</div>
+        <!--TAB1 : Element Background (EB)-->
+        <div id="tab1" class="tab_cont">
+            <h2 class="tab_title">Element BackGround</h2>
+            <div class="tab_text">
+                <p class="EB">Origin</p>
+                <p class="EB" id="color">Color</p>
+                <p class="EB" id="img">Image</p>
+                <p class="EB" id="img_size_px">Image Size</p>
+                <p class="EB" id="img_size_repeat">Image No Repaet</p>
+                <p class="EB" id="img_size_contain">Image Size Contain</p>
+                <p class="EB" id="img_size_cover">Image Size Cover</p>
+                <p class="EB" id="img_size_repeat_position_center">Image Position Center</p>
+                <p class="EB" id="img_size_repeat_position_px">Image Position 90% 90%</p>  
+            </div>
+        </div>
+        <div id="tab2" class="tab_cont hidden">
+            <h2 class="tab_title">Title</h2>
+            <div class="tab_text">
+                
+            </div>
+        </div>
+        <div id="tab3" class="tab_cont hidden">
+            <h2 class="tab_title">Title</h2>
+            <div class="tab_text">
+                
+            </div>
+        </div>
     </main>
     <script src="tab.js"></script>
 </body>
