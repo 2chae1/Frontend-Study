@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        #history_section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            float:left;
+        }
+        .history_element{
+            flex: 1;
+        }
+        #timer_section{
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <div id="history_section">
+    </div>
+    <!--timer display-->
+    <div id="timer_section">
+        <h1 id="timer_output">00:00:00</h1>
+        <button onclick="addSeconds()">+30min</button>
+        <button onclick="init()">Init</button>
+        <button onclick="start()">Start</button>
+        <button onclick="pause()">Pause</button>
+        <button onclick="complete()">Complete</button>
+        <h6 id="message" style="color:red;"></h6>
+    </div>
+
+    <script>
+
+        let running = false;
+        let goal_seconds=0;
+        let seconds = 0;
+        let timerDisplay;
+        
+        // event handler
+        function addSeconds() {
+            seconds = seconds+1800; //One click increase 30 minutes
+            goal_seconds=seconds;
+
+            let hours = Math.floor(seconds/3600);
+            let mins = Math.floor((seconds%3600)/60);
+            let secs = seconds % 3600 % 60;
+            if(hours < 10) hours = "0" + hours;
+            if(mins < 10) mins = "0" + mins;
+            if(secs < 10) secs = "0" + secs;
+
+            document.getElementById("timer_output").innerHTML = hours+":"+mins+":"+secs;
+            document.getElementById("message").innerHTML =""; 
+        }
+
+        function init() {
+            pause();
+            seconds = 0;
+            document.getElementById("timer_output").innerHTML = "00:00:00";     
+        }
+
+        function start() {
+            if(seconds==0) document.getElementById("message").innerHTML ="Time is zero... Please click +30min...";
+            else {
+                running = true;
+                run();
+            }
+        }
+
+        function pause() {
+            running = false;
+            clearTimeout(timerDisplay);
+        }
+
+        function complete() {
+            pause();
+            makeHistory(true);
+        }
+
+        function fail() {
+            pause();
+            makeHistory(false);
+        }
+
+        // History Section Function
+        function makeHistory(success) {
+
+            let success_seconds;
+            if(success) success_seconds = goal_seconds;
+            else success_seconds = goal_seconds - seconds;
+
+            let hours = Math.floor(success_seconds/3600);
+            let mins = Math.floor((success_seconds%3600)/60);
+            let secs = success_seconds % 3600 % 60;
+            if(hours < 10) hours = "0" + hours;
+            if(mins < 10) mins = "0" + mins;
+            if(secs < 10) secs = "0" + secs;
+    
+            let parentTag = document.getElementById('history_section');
+            let newH3Tag = document.createElement('h3');
+            
+            newH3Tag.setAttribute('class','history_element');
+            newH3Tag.innerHTML = hours+":"+mins+":"+secs;
+            if(success) newH3Tag.setAttribute('background-color','blue');
+            parentTag.appendChild(newH3Tag);
+
+            init();
+        }
+        
+        // Timer Section Function
+        function run() {
+            if(running) {
+                timerDisplay = setTimeout(function () {
+                    seconds--;
+
+                    let hours = Math.floor(seconds/3600);
+                    let mins = Math.floor((seconds%3600)/60);
+                    let secs = seconds % 3600 % 60;
+                    if(hours < 10) hours = "0" + hours;
+                    if(mins < 10) mins = "0" + mins;
+                    if(secs < 10) secs = "0" + secs;
+
+                    document.getElementById("timer_output").innerHTML = hours+":"+mins+":"+secs;
+
+                    if(seconds==0) fail();
+                    else run();
+                },1000)
+            } 
+        }
+
+    </script>
+</body>
+</html>
